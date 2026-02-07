@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shop</title>
+
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --primary: #2aabee; /* Telegram blue */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+header {
+  padding: 12px 16px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: bold;
+}
+
+.container {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* Product Card */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 12px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.price {
+  color: #0a8f08;
+  margin: 6px 0;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* 🖥️ Desktop */
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>🛍️ Telegram Shop</header>
+
+<div class="container">
+
+  <div class="card">
+    <img src="https://i.imgur.com/abc101.jpg">
+    <div class="card-body">
+      <div class="title">iPhone 15</div>
+      <div class="price">$999</div>
+      <button onclick="forward(101)">Forward</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://i.imgur.com/abc102.jpg">
+    <div class="card-body">
+      <div class="title">Samsung S24</div>
+      <div class="price">$899</div>
+      <button onclick="forward(102)">Forward</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const tg = Telegram.WebApp;
+tg.expand();
+
+const ADMIN = "RACHANA0308";
+
+const PRODUCTS = {
+  101: {
+    name: "iPhone 15",
+    price: "$999",
+    image: "https://i.imgur.com/abc101.jpg"
+  },
+  102: {
+    name: "Samsung S24",
+    price: "$899",
+    image: "https://i.imgur.com/abc102.jpg"
+  }
+};
+
+function forward(id) {
+  const p = PRODUCTS[id];
+
+  const text = encodeURIComponent(
+`🛒 Order
+📦 ID: ${id}
+📱 ${p.name}
+💰 ${p.price}
+🖼️ ${p.image}`
+  );
+
+  tg.openTelegramLink(
+    `https://t.me/${ADMIN}?text=${text}`
+  );
+}
+</script>
+
+</body>
+</html>
