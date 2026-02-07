@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop</title>
 
-<!-- ✅ REQUIRED: Telegram WebApp SDK -->
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
@@ -17,8 +16,8 @@
 
 body {
   margin: 0;
-  background: var(--bg);
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  background: var(--bg);
 }
 
 header {
@@ -26,79 +25,92 @@ header {
   background: var(--primary);
   color: #fff;
   font-weight: bold;
+  text-align: center;
+  font-size: 18px;
 }
 
+/* Container */
 .container {
-  padding: 12px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* 1 column mobile */
   gap: 12px;
+  max-width: 800px; /* constrain width */
+  margin: 12px auto; /* center horizontally */
+  padding: 0 12px;
 }
 
+/* Card */
 .card {
   background: var(--card);
-  border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .card img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1/1;
   object-fit: cover;
 }
 
 .card-body {
-  padding: 12px;
+  padding: 10px 12px;
+  text-align: center;
 }
 
 .title {
   font-size: 16px;
   font-weight: 600;
+  margin-bottom: 4px;
 }
 
 .price {
   color: #0a8f08;
-  margin: 6px 0;
+  margin-bottom: 8px;
 }
 
 button {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
+  width: 90%; /* slightly smaller */
+  padding: 10px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
   background: var(--primary);
   color: #fff;
-  border: none;
-  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #2388cc;
+}
+
+/* Desktop: 2 cards per row */
+@media (min-width: 600px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+@media (min-width: 900px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr); /* 3 per row on large screens */
+    gap: 20px;
+  }
 }
 </style>
 </head>
-
 <body>
 
 <header>🛍️ Telegram Shop</header>
 
-<div class="container">
-
-  <div class="card">
-    <img src="https://i.imgur.com/abc101.jpg">
-    <div class="card-body">
-      <div class="title">iPhone 15</div>
-      <div class="price">$999</div>
-      <button onclick="forward(101)">Forward</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://i.imgur.com/abc102.jpg">
-    <div class="card-body">
-      <div class="title">Samsung S24</div>
-      <div class="price">$899</div>
-      <button onclick="forward(102)">Forward</button>
-    </div>
-  </div>
-
-</div>
+<div class="container" id="container"></div>
 
 <script>
 const tg = window.Telegram.WebApp;
@@ -107,34 +119,34 @@ tg.expand();
 const ADMIN = "RACHANA0308";
 
 const PRODUCTS = {
-  101: {
-    name: "iPhone 15",
-    price: "$999",
-    image: "https://i.imgur.com/abc101.jpg"
-  },
-  102: {
-    name: "Samsung S24",
-    price: "$899",
-    image: "https://i.imgur.com/abc102.jpg"
-  }
+  101: { name: "iPhone 15", price: "$999", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
+  102: { name: "Samsung S24", price: "$899", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
+  103: { name: "AirPods Pro", price: "$249", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
+  104: { name: "MacBook Air", price: "$1199", image: "https://i.imgur.com/abc104.jpg" }
 };
 
 function forward(id) {
   const p = PRODUCTS[id];
-
-  const text = encodeURIComponent(
-`🛒 Order
-📦 ID: ${id}
-📱 ${p.name}
-💰 ${p.price}
-🖼️ ${p.image}`
-  );
-
-  // ✅ THIS opens Telegram App correctly
-  tg.openTelegramLink(
-    `https://t.me/${ADMIN}?text=${text}`
-  );
+  const text = encodeURIComponent(`🛒 Order\n📦 ID: ${id}\n📱 ${p.name}\n💰 ${p.price}\n🖼️ ${p.image}`);
+  tg.openTelegramLink(`https://t.me/${ADMIN}?text=${text}`);
 }
+
+// Dynamically create cards
+const container = document.getElementById('container');
+
+Object.entries(PRODUCTS).forEach(([id, p]) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <img src="${p.image}" alt="${p.name}">
+    <div class="card-body">
+      <div class="title">${p.name}</div>
+      <div class="price">${p.price}</div>
+      <button onclick="forward(${id})">Forward</button>
+    </div>
+  `;
+  container.appendChild(card);
+});
 </script>
 
 </body>
