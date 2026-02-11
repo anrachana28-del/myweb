@@ -1,152 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- SEO BASIC -->
+  <title>Telegram Shop – Buy Products Online</title>
+  <meta name="description" content="Telegram Shop web app to browse and order products online easily via Telegram." />
+  <meta name="keywords" content="telegram shop, telegram web app, online shop, buy products" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://anrachana28-del.github.io/myweb/" />
 
-<style>
-:root {
-  --bg: #f6f7f9;
-  --card: #ffffff;
-  --primary: #2aabee;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
-  background: var(--bg);
-}
-
-header {
-  padding: 12px 16px;
-  background: var(--primary);
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  font-size: 18px;
-}
-
-/* Container */
-.container {
-  display: grid;
-  grid-template-columns: 1fr; /* 1 column mobile */
-  gap: 12px;
-  max-width: 800px; /* constrain width */
-  margin: 12px auto; /* center horizontally */
-  padding: 0 12px;
-}
-
-/* Card */
-.card {
-  background: var(--card);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.card img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 10px 12px;
-  text-align: center;
-}
-
-.title {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.price {
-  color: #0a8f08;
-  margin-bottom: 8px;
-}
-
-button {
-  width: 90%; /* slightly smaller */
-  padding: 10px;
-  font-size: 15px;
-  border: none;
-  border-radius: 8px;
-  background: var(--primary);
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-button:hover {
-  background: #2388cc;
-}
-
-/* Desktop: 2 cards per row */
-@media (min-width: 600px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+  <!-- Structured Data (SEO Advanced) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "OnlineStore",
+    "name": "Telegram Shop",
+    "url": "https://anrachana28-del.github.io/myweb/",
+    "description": "Telegram shop web app for ordering products online"
   }
-}
-@media (min-width: 900px) {
-  .container {
-    grid-template-columns: repeat(3, 1fr); /* 3 per row on large screens */
-    gap: 20px;
-  }
-}
-</style>
+  </script>
+
+  <!-- Telegram WebApp -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --primary: #2aabee;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background: var(--bg);
+    }
+
+    header {
+      padding: 12px 16px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    /* SEO text (visible to Google) */
+    .seo-text {
+      max-width: 800px;
+      margin: 16px auto;
+      padding: 0 16px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* Container */
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-width: 800px;
+      margin: 12px auto;
+      padding: 0 12px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .price {
+      color: #0a8f08;
+      margin-bottom: 8px;
+    }
+
+    button {
+      width: 90%;
+      padding: 10px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2388cc;
+    }
+
+    @media (min-width: 600px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
 </head>
+
 <body>
 
 <header>🛍️ Telegram Shop</header>
 
+<!-- SEO CONTENT -->
+<section class="seo-text">
+  <h1>Telegram Shop Web App</h1>
+  <p>
+    Telegram Shop is a web application that allows users to browse products
+    and order directly through Telegram. This page is optimized for search
+    engines and works seamlessly inside Telegram WebApp.
+  </p>
+</section>
+
+<!-- PRODUCTS -->
 <div class="container" id="container"></div>
 
 <script>
-const tg = window.Telegram.WebApp;
-tg.expand();
+  const tg = window.Telegram.WebApp;
+  tg.expand();
 
-const ADMIN = "RACHANA0308";
+  const ADMIN = "RACHANA0308";
 
-const PRODUCTS = {
-  101: { name: "iPhone 15", price: "$999", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
-  102: { name: "Samsung S24", price: "$899", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
-  103: { name: "AirPods Pro", price: "$249", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
-  104: { name: "MacBook Air", price: "$1199", image: "https://i.imgur.com/abc104.jpg" }
-};
+  const PRODUCTS = {
+    101: { name: "iPhone 15", price: "$999", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
+    102: { name: "Samsung S24", price: "$899", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
+    103: { name: "AirPods Pro", price: "$249", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" },
+    104: { name: "MacBook Air", price: "$1199", image: "https://www.keycdn.com/img/support/image-processing-lg@2x.webp" }
+  };
 
-function forward(id) {
-  const p = PRODUCTS[id];
-  const text = encodeURIComponent(`🛒 Order\n📦 ID: ${id}\n📱 ${p.name}\n💰 ${p.price}\n🖼️ ${p.image}`);
-  tg.openTelegramLink(`https://t.me/${ADMIN}?text=${text}`);
-}
+  function forward(id) {
+    const p = PRODUCTS[id];
+    const text = encodeURIComponent(
+      `🛒 Order\n📦 ID: ${id}\n📱 ${p.name}\n💰 ${p.price}\n🖼️ ${p.image}`
+    );
+    tg.openTelegramLink(`https://t.me/${ADMIN}?text=${text}`);
+  }
 
-// Dynamically create cards
-const container = document.getElementById('container');
+  const container = document.getElementById("container");
 
-Object.entries(PRODUCTS).forEach(([id, p]) => {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.innerHTML = `
-    <img src="${p.image}" alt="${p.name}">
-    <div class="card-body">
-      <div class="title">${p.name}</div>
-      <div class="price">${p.price}</div>
-      <button onclick="forward(${id})">Forward</button>
-    </div>
-  `;
-  container.appendChild(card);
-});
+  Object.entries(PRODUCTS).forEach(([id, p]) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${p.image}" alt="${p.name} product image">
+      <div class="card-body">
+        <div class="title">${p.name}</div>
+        <div class="price">${p.price}</div>
+        <button onclick="forward(${id})">Order via Telegram</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
 </script>
 
 </body>
